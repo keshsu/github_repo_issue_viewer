@@ -5,25 +5,23 @@ import React from "react";
 interface Props {
   repoUrl: string;
   setrepoUrl: React.Dispatch<React.SetStateAction<string>>;
+  handleSubmit: (e: React.FormEvent) => void;
 }
-const InputField: React.FC<Props> = ({ repoUrl, setrepoUrl }: Props) => {
-  const handleSubmit = () => {};
-
+const InputField: React.FC<Props> = ({
+  repoUrl,
+  setrepoUrl,
+  handleSubmit,
+}: Props) => {
   return (
     <div className="inputField-wrapper">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <TextField
           label="Repo Url"
           variant="outlined"
           value={repoUrl}
           onChange={(e) => setrepoUrl(e.target.value)}
         />
-        <Button
-          variant="contained"
-          onClick={() => {
-            alert("clicked");
-          }}
-        >
+        <Button variant="contained" type="submit">
           Load Issues
         </Button>
       </form>
