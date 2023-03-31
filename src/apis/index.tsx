@@ -25,7 +25,7 @@ export const searchRepo = (searchParams: Props) => {
 
 export const listIssues = (Issue: IssueProps) => {
   return axios
-    .get(`https://api.github.com/repos/${Issue.owner}/${Issue.repo}/issues/`)
+    .get(`https://api.github.com/repos/${Issue.owner}/${Issue.repo}/issues`)
     .then((res) => {
       return res;
     });

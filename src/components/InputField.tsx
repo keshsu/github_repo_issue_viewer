@@ -16,12 +16,13 @@ const InputField: React.FC<Props> = ({
     <div className="inputField-wrapper">
       <form onSubmit={(e) => handleSubmit(e)}>
         <TextField
+          fullWidth
           label="Repo Url"
           variant="outlined"
           value={repoUrl}
           onChange={(e) => setrepoUrl(e.target.value)}
         />
-        <Button variant="contained" type="submit">
+        <Button variant="contained" type="submit" className="load-button">
           Load Issues
         </Button>
       </form>

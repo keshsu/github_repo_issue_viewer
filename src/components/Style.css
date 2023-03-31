@@ -1,0 +1,31 @@
+.inputField-wrapper form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.load-button {
+  height: 100%;
+  white-space: nowrap;
+  margin-left: 1em !important;
+}
+
+.issues-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #f2f2f2;
+  padding: 3em 1em;
+}
+.backlog,
+.in-progress,
+.completed {
+  width: 33.33%;
+  padding: 1em;
+}
+
+.issue-card {
+  background: #fff;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  cursor: pointer;
+}

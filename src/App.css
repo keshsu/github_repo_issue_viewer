@@ -1,9 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  width: 100vw;
-  height: 100vh;
-  background: #f4f4f4;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #fffefe;
+  padding: 5em;
+}
+
+.main-wrapper {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+.breadcrumb {
+  padding: 1em 0;
+}
+
+.breadcrumb-link {
+  color: #398def;
+  font-weight: 500;
+}
+.App-header{
+  text-align: center;
 }
