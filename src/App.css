@@ -19,9 +19,10 @@
 }
 
 .breadcrumb-link {
-  color: #398def;
-  font-weight: 500;
+  color: #398def !important;
+  font-weight: 500 !important;
 }
+
 .App-header{
   text-align: center;
 }

@@ -21,6 +21,7 @@ const InputField: React.FC<Props> = ({
           variant="outlined"
           value={repoUrl}
           onChange={(e) => setrepoUrl(e.target.value)}
+          required
         />
         <Button variant="contained" type="submit" className="load-button">
           Load Issues

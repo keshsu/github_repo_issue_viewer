@@ -1,12 +1,15 @@
-import { Breadcrumbs, Link } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { listIssues } from "./apis";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { Breadcrumbs, Link } from "@mui/material";
+
 import InputField from "./components/InputField";
 import IssuesWrapper from "./components/Issues/IssuesWrapper";
+
 import { Issue, IssuesStatus } from "./models/issues";
 import { RepoDetails } from "./models/repoInfo";
+
+import { listIssues } from "./apis";
 import "./App.css";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 const App: React.FC = () => {
   const [repoUrl, setrepoUrl] = useState<string>("");
@@ -15,9 +18,6 @@ const App: React.FC = () => {
   const [backlogIssues, setBacklogIssues] = useState<Issue[]>([]);
   const [activeIssues, setActiveIssues] = useState<Issue[]>([]);
   const [completedIssues, setCompletedIssues] = useState<Issue[]>([]);
-  const [issues, setissues] = useState<Issue[]>([]);
-  const [inProgressIssue, setinProgressIssue] = useState<Issue[]>([]);
-  const [completedIssue, setcompletedIssue] = useState<Issue[]>([]);
 
   useEffect(() => {
     let backlogIssues = window.localStorage.getItem("backlogIssues");
@@ -36,11 +36,22 @@ const App: React.FC = () => {
       let parsed = JSON.parse(completedIssues);
       setCompletedIssues(parsed);
     }
-  }, []);
+    let repoDetails = window.localStorage.getItem("repoDetails");
+    if (repoDetails) {
+      let parsed = JSON.parse(repoDetails);
+      setrepoDetails(parsed);
+    }
+  }, [searching]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setsearching(!searching);
+    setsearching(true);
+    window.localStorage.removeItem("repoDetails");
+    window.localStorage.removeItem("backlogIssues");
+    window.localStorage.removeItem("activeIssues");
+    window.localStorage.removeItem("completedIssues");
+
+    setrepoDetails({ owner: "", repo: "" });
 
     if (!repoUrl) return null;
 
@@ -112,10 +123,17 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    if (repoDetails) {
+    if (repoDetails && searching) {
       listIssues({ owner: repoDetails.owner, repo: repoDetails.repo }).then(
         (res) => {
           setBacklogIssues(res.data);
+          setActiveIssues([]);
+          setCompletedIssues([]);
+          setsearching(false);
+          window.localStorage.setItem(
+            "repoDetails",
+            JSON.stringify(repoDetails)
+          );
         }
       );
     }
